@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecturer Course Dashboard - CESSTIG</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/lecturer-course-dashboard.css">
+  <link rel="icon" type="image/png" href="img/logo.png">
+</head>
+<body>
+  <div class="dashboard-container d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+      <div class="logo-container d-flex align-items-center justify-content-between p-3">
+        <div class="d-flex align-items-center">
+          <img src="img/logo.png" alt="CESSTIG Logo" class="img-fluid">
+          <span class="logo-text ms-2">CESSTIG</span>
+        </div>
+        <button class="btn-toggle border-0 bg-transparent" id="sidebarCollapse" title="Toggle Sidebar">
+          <i class="fas fa-bars menu-icon"></i>
+        </button>
+      </div>
+      <!-- <div class="course-info p-3">
+        <h5 id="course-title">Course Title</h5>
+        <p id="course-code" class="text-muted">Course Code</p>
+        <p id="students-count" class="text-muted"><i class="fas fa-user-graduate me-2"></i>0 Students</p>
+      </div> -->
+      <div class="sidebar-menu">
+        <div class="menu-item active" data-target="#overview">
+          <i class="fas fa-home"></i>
+          <span>Overview</span>
+        </div>
+        <div class="menu-item" data-target="#resources">
+          <i class="fas fa-book-open"></i>
+          <span>Resources</span>
+        </div>
+        <div class="menu-item" data-target="#assignments">
+          <i class="fas fa-tasks"></i>
+          <span>Assignments</span>
+        </div>
+        <div class="menu-item" data-target="#tests-quizzes">
+          <i class="fas fa-clipboard-check"></i>
+          <span>Tests & Quizzes</span>
+        </div>
+        <div class="menu-item" data-target="#submissions">
+          <i class="fas fa-file-upload"></i>
+          <span>Submissions</span>
+        </div>
+        <div class="menu-item" data-target="#attendance">
+          <i class="fas fa-user-check"></i>
+          <span>Attendance</span>
+        </div>
+        <div class="menu-item" data-target="#messages">
+          <i class="fas fa-envelope"></i>
+          <span>Messages</span>
+        </div>
+        <div class="menu-item" data-target="#announcements">
+          <i class="fas fa-bullhorn"></i>
+          <span>Announcements</span>
+        </div>
+        <div class="menu-item" data-target="#discussions">
+          <i class="fas fa-comments"></i>
+          <span>Discussions</span>
+        </div>
+        <div class="menu-item" data-target="#main-dashboard">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Main Dashboard</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-grow-1">
+      <!-- Header -->
+      <header class="header d-flex align-items-center justify-content-between p-3 bg-white border-bottom sticky-top">
+        <button type="button" id="sidebar-collapse" class="btn btn-primary d-lg-none" title="Toggle Sidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="course-title">
+          <span id="header-course-title">Course Title</span>
+          <span id="header-course-code" class="ms-2 text-muted">Course Code</span>
+        </div>
+        <div class="header-right d-flex align-items-center">
+          <div class="notification-icon position-relative me-3">
+            <i class="fas fa-bell"></i>
+            <span class="badge orange position-absolute top-0 start-100 translate-middle rounded-pill">0</span>
+          </div>
+          <div class="user-info d-flex align-items-center">
+            <img src="img/user.jpg" alt="User" class="img-fluid rounded-circle user-image">
+            <span class="user-name ms-2 d-none d-md-block">Lecturer Name</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content Sections -->
+      <!-- Overview Section -->
+      <div class="dashboard-content" id="overview">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item">Course</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Overview</span>
+          </div>
+          <div class="date-time">
+            <span id="current-date"></span> | <span id="current-time"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Course Description</h5>
+                <button class="btn btn-sm btn-primary" id="edit-description-btn">
+                  <i class="fas fa-edit"></i> Edit
+                </button>
+              </div>
+              <div class="card-body">
+                <div id="description-view">
+                  <p id="course-description">Loading course description...</p>
+                </div>
+                <div id="description-edit" style="display: none;">
+                  <form id="description-form">
+                    <div class="mb-3">
+                      <textarea class="form-control" id="description-textarea" rows="5"></textarea>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                      <button type="button" class="btn btn-secondary me-2" id="cancel-description-btn">Cancel</button>
+                      <button type="submit" class="btn btn-primary" id="save-description-btn">Save Changes</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5>Course Statistics</h5>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-6 mb-3">
+                    <div class="stat-card">
+                      <div class="stat-icon blue">
+                        <i class="fas fa-user-graduate"></i>
+                      </div>
+                      <div class="stat-info">
+                        <div class="stat-label">Students</div>
+                        <div class="stat-value" id="student-count">0</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <div class="stat-card">
+                      <div class="stat-icon green">
+                        <i class="fas fa-tasks"></i>
+                      </div>
+                      <div class="stat-info">
+                        <div class="stat-label">Assignments</div>
+                        <div class="stat-value" id="assignment-count">0</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <div class="stat-card">
+                      <div class="stat-icon yellow">
+                        <i class="fas fa-clipboard-check"></i>
+                      </div>
+                      <div class="stat-info">
+                        <div class="stat-label">Tests</div>
+                        <div class="stat-value" id="test-count">0</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <div class="stat-card">
+                      <div class="stat-icon red">
+                        <i class="fas fa-file-upload"></i>
+                      </div>
+                      <div class="stat-info">
+                        <div class="stat-label">Submissions</div>
+                        <div class="stat-value" id="submission-count">0</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5>Recent Activity</h5>
+              </div>
+              <div class="card-body">
+                <ul class="list-group" id="recent-activity">
+                  <li class="list-group-item text-center">No recent activity</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resources Section -->
+      <div class="dashboard-content" id="resources" style="display: none;">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item">Course</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Resources</span>
+          </div>
+          <div>
+            <button class="btn btn-primary" id="add-resource-btn">
+              <i class="fas fa-plus"></i> Add Resource
+            </button>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5>Course Materials</h5>
+          </div>
+          <div class="card-body">
+            <div class="resources-list" id="resources-list">
+              <div class="text-center">
+                <p>Loading resources...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Assignments Section -->
+      <div class="dashboard-content" id="assignments" style="display: none;">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item">Course</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Assignments</span>
+          </div>
+          <div>
+            <button class="btn btn-primary" id="add-assignment-btn">
+              <i class="fas fa-plus"></i> Create Assignment
+            </button>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5>Assignments</h5>
+          </div>
+          <div class="card-body">
+            <div class="assignments-list" id="assignments-list">
+              <div class="text-center">
+                <p>Loading assignments...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tests & Quizzes Section -->
+      <div class="dashboard-content" id="tests-quizzes" style="display: none;">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item">Course</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Tests & Quizzes</span>
+          </div>
+          <div>
+            <button class="btn btn-primary" id="add-test-btn">
+              <i class="fas fa-plus"></i> Create Test/Quiz
+            </button>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5>Tests & Quizzes</h5>
+          </div>
+          <div class="card-body">
+            <div class="tests-list" id="tests-list">
+              <div class="text-center">
+                <p>Loading tests and quizzes...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Submissions Section -->
+      <div class="dashboard-content" id="submissions" style="display: none;">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item">Course</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Submissions</span>
+          </div>
+          <div class="date-time">
+            <span id="submissions-current-date"></span> | <span id="submissions-current-time"></span>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5>Student Submissions</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Assignment</th>
+                    <th>Submitted Date</th>
+                    <th>Status</th>
+                    <th>Grade</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="submissions-table-body">
+                  <tr>
+                    <td colspan="6" class="text-center">Loading submissions...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Attendance Section -->
+      <div class="dashboard-content" id="attendance" style="display: none;">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item">Course</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Attendance</span>
+          </div>
+          <div>
+            <button class="btn btn-primary" id="take-attendance-btn">
+              <i class="fas fa-clipboard-list"></i> Take Attendance
+            </button>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5>Attendance Records</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Present</th>
+                    <th>Absent</th>
+                    <th>Percentage</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="attendance-table-body">
+                  <tr>
+                    <td colspan="5" class="text-center">Loading attendance records...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Messages Section -->
+      <div class="dashboard-content" id="messages" style="display: none;">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item">Course</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Messages</span>
+          </div>
+          <div class="date-time">
+            <span id="messages-current-date"></span> | <span id="messages-current-time"></span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Conversations</h5>
+                <button class="btn btn-sm btn-primary" id="new-message-btn">
+                  <i class="fas fa-plus"></i> New Message
+                </button>
+              </div>
+              <div class="card-body p-0">
+                <div class="list-group list-group-flush" id="conversations-list">
+                  <div class="list-group-item text-center">
+                    <p>Loading conversations...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 id="message-header">Select a conversation</h5>
+              </div>
+              <div class="card-body">
+                <div id="message-content">
+                  <p class="text-center">Select a conversation to view messages</p>
+                </div>
+                <div id="reply-form" style="display: none;">
+                  <div class="form-group mt-3">
+                    <textarea class="form-control" id="reply-message" rows="3" placeholder="Type your message..."></textarea>
+                  </div>
+                  <div class="d-flex justify-content-end mt-2">
+                    <button class="btn btn-primary" id="send-reply-btn">
+                      <i class="fas fa-paper-plane"></i> Send
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Announcements Section -->
+      <div class="dashboard-content" id="announcements" style="display: none;">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item">Course</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Announcements</span>
+          </div>
+          <div>
+            <button class="btn btn-primary" id="add-announcement-btn">
+              <i class="fas fa-plus"></i> Create Announcement
+            </button>
+          </div>
+        </div>
+
+        <div class="card mb-4">
+          <div class="card-header">
+            <h5>Announcements</h5>
+          </div>
+          <div class="card-body">
+            <div id="announcements-list">
+              <div class="text-center">
+                <p>Loading announcements...</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Discussions Section -->
+      <div class="dashboard-content" id="discussions" style="display: none;">
+        <div class="page-header d-flex justify-content-between align-items-center mb-4">
+          <div class="breadcrumb">
+            <span class="breadcrumb-item">Course</span>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item active">Discussions</span>
+          </div>
+          <div>
+            <button class="btn btn-primary" id="add-topic-btn">
+              <i class="fas fa-plus"></i> Create Topic
+            </button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5>Discussion Topics</h5>
+              </div>
+              <div class="card-body p-0">
+                <div class="list-group list-group-flush" id="topics-list">
+                  <div class="list-group-item text-center">
+                    <p>Loading discussion topics...</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8 mb-4">
+            <div class="card">
+              <div class="card-header">
+                <h5 id="discussion-header">Select a topic</h5>
+              </div>
+              <div class="card-body">
+                <div id="discussion-content">
+                  <p class="text-center">Select a topic to view the discussion</p>
+                </div>
+                <div id="discussion-reply-form" style="display: none;">
+                  <div class="form-group mt-3">
+                    <textarea class="form-control" id="discussion-reply" rows="3" placeholder="Type your reply..."></textarea>
+                  </div>
+                  <div class="d-flex justify-content-end mt-2">
+                    <button class="btn btn-primary" id="send-discussion-reply-btn">
+                      <i class="fas fa-paper-plane"></i> Post Reply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <footer class="footer-container sticky-bottom">
+        <div class="footer">
+          © Copyrights CESSTIG 2025. All rights reserved. Designed by Genius<sup>TM</sup>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- New Message Modal -->
+  <div class="modal fade" id="newMessageModal" tabindex="-1" aria-labelledby="newMessageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newMessageModalLabel">New Message</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="new-message-form">
+            <div class="mb-3">
+              <label for="message-recipient" class="form-label">To:</label>
+              <select class="form-select" id="message-recipient" required>
+                <option value="">Select recipient</option>
+                <option value="all">All Students</option>
+                <!-- Student options will be populated dynamically -->
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="message-subject" class="form-label">Subject:</label>
+              <input type="text" class="form-control" id="message-subject" required>
+            </div>
+            <div class="mb-3">
+              <label for="message-body" class="form-label">Message:</label>
+              <textarea class="form-control" id="message-body" rows="5" required></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="send-message-btn">Send Message</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Announcement Modal -->
+  <div class="modal fade" id="newAnnouncementModal" tabindex="-1" aria-labelledby="newAnnouncementModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newAnnouncementModalLabel">New Announcement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="new-announcement-form">
+            <div class="mb-3">
+              <label for="announcement-title" class="form-label">Title:</label>
+              <input type="text" class="form-control" id="announcement-title" required>
+            </div>
+            <div class="mb-3">
+              <label for="announcement-content" class="form-label">Content:</label>
+              <textarea class="form-control" id="announcement-content" rows="5" required></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="post-announcement-btn">Post Announcement</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Resource Modal -->
+  <div class="modal fade" id="newResourceModal" tabindex="-1" aria-labelledby="newResourceModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newResourceModalLabel">Add Resource</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="new-resource-form">
+            <div class="mb-3">
+              <label for="resource-title" class="form-label">Title:</label>
+              <input type="text" class="form-control" id="resource-title" required>
+            </div>
+            <div class="mb-3">
+              <label for="resource-type" class="form-label">Type:</label>
+              <select class="form-select" id="resource-type" required>
+                <option value="">Select type</option>
+                <option value="document">Document</option>
+                <option value="video">Video</option>
+                <option value="link">External Link</option>
+              </select>
+            </div>
+            <div class="mb-3" id="resource-file-container">
+              <label for="resource-file" class="form-label">File:</label>
+              <input type="file" class="form-control" id="resource-file">
+            </div>
+            <div class="mb-3" id="resource-link-container" style="display: none;">
+              <label for="resource-link" class="form-label">URL:</label>
+              <input type="url" class="form-control" id="resource-link">
+            </div>
+            <div class="mb-3">
+              <label for="resource-description" class="form-label">Description:</label>
+              <textarea class="form-control" id="resource-description" rows="3"></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="add-resource-submit-btn">Add Resource</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Assignment Modal -->
+  <div class="modal fade" id="newAssignmentModal" tabindex="-1" aria-labelledby="newAssignmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newAssignmentModalLabel">Create Assignment</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="new-assignment-form">
+            <div class="mb-3">
+              <label for="assignment-title" class="form-label">Title:</label>
+              <input type="text" class="form-control" id="assignment-title" required>
+            </div>
+            <div class="mb-3">
+              <label for="assignment-description" class="form-label">Description:</label>
+              <textarea class="form-control" id="assignment-description" rows="5" required></textarea>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="assignment-due-date" class="form-label">Due Date:</label>
+                <input type="datetime-local" class="form-control" id="assignment-due-date" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="assignment-points" class="form-label">Points:</label>
+                <input type="number" class="form-control" id="assignment-points" min="0" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="assignment-file" class="form-label">Attachment (Optional):</label>
+              <input type="file" class="form-control" id="assignment-file">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="create-assignment-btn">Create Assignment</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- New Test/Quiz Modal -->
+  <div class="modal fade" id="newTestModal" tabindex="-1" aria-labelledby="newTestModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newTestModalLabel">Create Test/Quiz</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="new-test-form">
+            <div class="mb-3">
+              <label for="test-title" class="form-label">Title:</label>
+              <input type="text" class="form-control" id="test-title" required>
+            </div>
+            <div class="mb-3">
+              <label for="test-description" class="form-label">Description:</label>
+              <textarea class="form-control" id="test-description" rows="3" required></textarea>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="test-start-date" class="form-label">Start Date:</label>
+                <input type="datetime-local" class="form-control" id="test-start-date" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="test-end-date" class="form-label">End Date:</label>
+                <input type="datetime-local" class="form-control" id="test-end-date" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="test-duration" class="form-label">Duration (minutes):</label>
+                <input type="number" class="form-control" id="test-duration" min="1" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="test-points" class="form-label">Total Points:</label>
+                <input type="number" class="form-control" id="test-points" min="0" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Questions:</label>
+              <div id="questions-container">
+                <!-- Questions will be added here dynamically -->
+                <div class="text-center mb-3">
+                  <p>No questions added yet</p>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outline-primary" id="add-question-btn">
+                <i class="fas fa-plus"></i> Add Question
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="create-test-btn">Create Test/Quiz</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Take Attendance Modal -->
+  <div class="modal fade" id="takeAttendanceModal" tabindex="-1" aria-labelledby="takeAttendanceModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="takeAttendanceModalLabel">Take Attendance</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="attendance-form">
+            <div class="mb-3">
+              <label for="attendance-date" class="form-label">Date:</label>
+              <input type="date" class="form-control" id="attendance-date" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Students:</label>
+              <div id="students-attendance-list">
+                <div class="text-center">
+                  <p>Loading students...</p>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="save-attendance-btn">Save Attendance</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="js/"></script>
+  <!-- <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  // Check if user is logged in
+  const token = localStorage.getItem("token");
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  if (!token || !user || user.role !== "lecturer") {
+    window.location.href = "index.html";
+    return;
+  }
+
+  // Set user name in header
+  document.querySelector(".user-name").textContent = `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'Lecturer';
+
+  // Get course ID from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const courseId = urlParams.get('id');
+
+  if (!courseId) {
+    window.location.href = "lecturer-dashboard.html";
+    return;
+  }
+
+  // API base URL
+  const API_URL = 'http://localhost:5000/api';
+
+  // Load course data
+  loadCourseData(courseId);
+
+  // Date and Time
+  function updateTime() {
+    const date = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const timeOptions = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+    
+    // Update all date/time elements
+    document.querySelectorAll('[id$="current-date"]').forEach(el => {
+      el.textContent = date.toLocaleDateString('en-US', options);
+    });
+    
+    document.querySelectorAll('[id$="current-time"]').forEach(el => {
+      el.textContent = date.toLocaleTimeString('en-US', timeOptions);
+    });
+  }
+  
+  updateTime();
+  setInterval(updateTime, 1000);
+
+  // Sidebar Collapse
+  const sidebar = document.getElementById("sidebar");
+  const sidebarCollapse = document.getElementById("sidebarCollapse");
+  const mainContent = document.querySelector(".main-content");
+
+  if (sidebarCollapse && sidebar) {
+    sidebarCollapse.addEventListener("click", () => {
+      sidebar.classList.toggle("collapsed");
+      // Save sidebar state to localStorage
+      localStorage.setItem("sidebarState", sidebar.classList.contains("collapsed") ? "collapsed" : "expanded");
+    });
+
+    // Check if there's a saved state in localStorage
+    const savedState = localStorage.getItem("sidebarState");
+    if (savedState === "collapsed") {
+      sidebar.classList.add("collapsed");
+    }
+  }
+
+  // Menu Switching
+  const menuItems = document.querySelectorAll(".menu-item");
+  const dashboardContents = document.querySelectorAll(".dashboard-content");
+
+  menuItems.forEach(item => {
+    item.addEventListener('click', () => {
+      // Handle main dashboard navigation
+      if (item.getAttribute('data-target') === '#main-dashboard') {
+        window.location.href = 'lecturer-dashboard.html';
+        return;
+      }
+      
+      // Remove active class from all menu items
+      menuItems.forEach(menu => menu.classList.remove('active'));
+      // Add active class to the clicked menu item
+      item.classList.add('active');
+
+      // Hide all dashboard contents
+      dashboardContents.forEach(content => {
+        content.style.display = 'none';
+      });
+      
+      // Show the target dashboard content
+      const target = item.getAttribute('data-target');
+      const targetContent = document.querySelector(target);
+      if (targetContent) {
+        targetContent.style.display = 'block';
+        
+        // Load data based on the selected menu
+        if (target === '#resources') {
+          loadResources(courseId);
+        } else if (target === '#assignments') {
+          loadAssignments(courseId);
+        } else if (target === '#tests-quizzes') {
+          loadTestsQuizzes(courseId);
+        } else if (target === '#submissions') {
+          loadSubmissions(courseId);
+        } else if (target === '#attendance') {
+          loadAttendance(courseId);
+        } else if (target === '#messages') {
+          loadMessages(courseId);
+        } else if (target === '#announcements') {
+          loadAnnouncements(courseId);
+        } else if (target === '#discussions') {
+          loadDiscussions(courseId);
+        }
+      }
+      
+      // On mobile, collapse the sidebar after selection
+      if (window.innerWidth <= 768) {
+        sidebar.classList.remove('active');
+      }
+      
+      // Save active menu to localStorage
+      localStorage.setItem('activeMenu', target);
+    });
+  });
+
+  // Check if there's a saved active menu in localStorage
+  const savedActiveMenu = localStorage.getItem("activeMenu");
+  if (savedActiveMenu) {
+    const activeMenuItem = document.querySelector(`.menu-item[data-target="${savedActiveMenu}"]`);
+    if (activeMenuItem) {
+      activeMenuItem.click();
+    } else {
+      // Show the default overview content if no saved state
+      document.querySelector("#overview").style.display = "block";
+    }
+  } else {
+    // Show the default overview content if no saved state
+    document.querySelector("#overview").style.display = "block";
+  }
+
+  // Handle window resize
+  window.addEventListener("resize", () => {
+    if (window.innerWidth <= 768) {
+      sidebar.classList.remove("collapsed");
+    } else {
+      // Restore saved state on larger screens
+      const savedState = localStorage.getItem("sidebarState");
+      if (savedState === "collapsed") {
+        sidebar.classList.add("collapsed");
+      } else {
+        sidebar.classList.remove("collapsed");
+      }
+    }
+  });
+
+  // Mobile sidebar toggle
+  const sidebarCollapseBtn = document.getElementById('sidebar-collapse');
+  if (sidebarCollapseBtn) {
+    sidebarCollapseBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('active');
+    });
+  }
+
+  // Edit course description
+  const editDescriptionBtn = document.getElementById('edit-description-btn');
+  const saveDescriptionBtn = document.getElementById('save-description-btn');
+  const cancelDescriptionBtn = document.getElementById('cancel-description-btn');
+  
+  if (editDescriptionBtn) {
+    editDescriptionBtn.addEventListener('click', () => {
+      const descriptionText = document.getElementById('course-description').textContent;
+      document.getElementById('description-textarea').value = descriptionText;
+      document.getElementById('description-view').style.display = 'none';
+      document.getElementById('description-edit').style.display = 'block';
+    });
+  }
+  
+  if (cancelDescriptionBtn) {
+    cancelDescriptionBtn.addEventListener('click', () => {
+      document.getElementById('description-view').style.display = 'block';
+      document.getElementById('description-edit').style.display = 'none';
+    });
+  }
+  
+  if (saveDescriptionBtn) {
+    saveDescriptionBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      updateCourseDescription(courseId);
+    });
+  }
+
+  // Modal event listeners
+  // Add Resource
+  const addResourceBtn = document.getElementById('add-resource-btn');
+  const addResourceSubmitBtn = document.getElementById('add-resource-submit-btn');
+  
+  if (addResourceBtn) {
+    addResourceBtn.addEventListener('click', () => {
+      const modal = new bootstrap.Modal(document.getElementById('newResourceModal'));
+      modal.show();
+    });
+  }
+  
+  if (addResourceSubmitBtn) {
+    addResourceSubmitBtn.addEventListener('click', () => {
+      addResource(courseId);
+    });
+  }
+
+  // Resource type change
+  const resourceTypeSelect = document.getElementById('resource-type');
+  if (resourceTypeSelect) {
+    resourceTypeSelect.addEventListener('change', () => {
+      const resourceType = resourceTypeSelect.value;
+      const fileContainer = document.getElementById('resource-file-container');
+      const linkContainer = document.getElementById('resource-link-container');
+      
+      if (resourceType === 'link') {
+        fileContainer.style.display = 'none';
+        linkContainer.style.display = 'block';
+      } else {
+        fileContainer.style.display = 'block';
+        linkContainer.style.display = 'none';
+      }
+    });
+  }
+
+  // Add Assignment
+  const addAssignmentBtn = document.getElementById('add-assignment-btn');
+  const createAssignmentBtn = document.getElementById('create-assignment-btn');
+  
+  if (addAssignmentBtn) {
+    addAssignmentBtn.addEventListener('click', () => {
+      const modal = new bootstrap.Modal(document.getElementById('newAssignmentModal'));
+      modal.show();
+    });
+  }
+  
+  if (createAssignmentBtn) {
+    createAssignmentBtn.addEventListener('click', () => {
+      createAssignment(courseId);
+    });
+  }
+
+  // Add Test/Quiz
+  const addTestBtn = document.getElementById('add-test-btn');
+  const createTestBtn = document.getElementById('create-test-btn');
+  const addQuestionBtn = document.getElementById('add-question-btn');
+  
+  if (addTestBtn) {
+    addTestBtn.addEventListener('click', () => {
+      const modal = new bootstrap.Modal(document.getElementById('newTestModal'));
+      modal.show();
+    });
+  }
+  
+  if (createTestBtn) {
+    createTestBtn.addEventListener('click', () => {
+      createTest(courseId);
+    });
+  }
+  
+  if (addQuestionBtn) {
+    addQuestionBtn.addEventListener('click', () => {
+      addQuestion();
+    });
+  }
+
+  // Take Attendance
+  const takeAttendanceBtn = document.getElementById('take-attendance-btn');
+  const saveAttendanceBtn = document.getElementById('save-attendance-btn');
+  
+  if (takeAttendanceBtn) {
+    takeAttendanceBtn.addEventListener('click', () => {
+      loadStudentsForAttendance(courseId);
+      const modal = new bootstrap.Modal(document.getElementById('takeAttendanceModal'));
+      modal.show();
+    });
+  }
+  
+  if (saveAttendanceBtn) {
+    saveAttendanceBtn.addEventListener('click', () => {
+      saveAttendance(courseId);
+    });
+  }
+
+  // New Message
+  const newMessageBtn = document.getElementById('new-message-btn');
+  const sendMessageBtn = document.getElementById('send-message-btn');
+  
+  if (newMessageBtn) {
+    newMessageBtn.addEventListener('click', () => {
+      loadStudentsForMessage(courseId);
+      const modal = new bootstrap.Modal(document.getElementById('newMessageModal'));
+      modal.show();
+    });
+  }
+  
+  if (sendMessageBtn) {
+    sendMessageBtn.addEventListener('click', () => {
+      sendNewMessage(courseId);
+    });
+  }
+
+  // New Announcement
+  const addAnnouncementBtn = document.getElementById('add-announcement-btn');
+  const postAnnouncementBtn = document.getElementById('post-announcement-btn');
+  
+  if (addAnnouncementBtn) {
+    addAnnouncementBtn.addEventListener('click', () => {
+      const modal = new bootstrap.Modal(document.getElementById('newAnnouncementModal'));
+      modal.show();
+    });
+  }
+
+
+
+
+
+  </script> -->
+</body>
+</html>
+

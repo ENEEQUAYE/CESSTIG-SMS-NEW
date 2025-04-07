@@ -1,0 +1,271 @@
+<!-- View Course Modal -->
+<div class="modal fade" id="viewCourseModal" tabindex="-1" aria-labelledby="viewCourseModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewCourseModalLabel">Course Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <img id="view-course-thumbnail" src="img/course-default.jpg" alt="Course Thumbnail" class="img-fluid rounded">
+            </div>
+            <div class="col-md-8">
+              <h4 id="view-course-name">Course Name</h4>
+              <p><strong>Course Code:</strong> <span id="view-course-code"></span></p>
+              <p><strong>Lecturer:</strong> <span id="view-course-lecturer"></span></p>
+              <p><strong>Students:</strong> <span id="view-course-students"></span></p>
+            </div>
+          </div>
+          <div class="mb-3">
+            <h5>Description</h5>
+            <p id="view-course-description"></p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="edit-course-btn">Edit Course</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- View Student Modal -->
+  <div class="modal fade" id="viewStudentModal" tabindex="-1" aria-labelledby="viewStudentModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewStudentModalLabel">Student Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-md-4 text-center">
+              <img id="view-student-image" src="img/user.jpg" alt="Student" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+              <h5 id="view-student-name">Student Name</h5>
+              <p id="view-student-id" class="badge bg-primary">ID: STU12345</p>
+            </div>
+            <div class="col-md-8">
+              <div class="mb-2">
+                <strong>Email:</strong> <span id="view-student-email"></span>
+              </div>
+              <div class="mb-2">
+                <strong>Phone:</strong> <span id="view-student-phone"></span>
+              </div>
+              <div class="mb-2">
+                <strong>Date of Birth:</strong> <span id="view-student-dob"></span>
+              </div>
+              <div class="mb-2">
+                <strong>Course:</strong> <span id="view-student-course"></span>
+              </div>
+              <div class="mb-2">
+                <strong>Lecturer:</strong> <span id="view-student-lecturer"></span>
+              </div>
+              <div class="mb-2">
+                <strong>Enrollment Date:</strong> <span id="view-student-enrollment"></span>
+              </div>
+              <div class="mb-2">
+                <strong>Country:</strong> <span id="view-student-country"></span>
+              </div>
+              <div class="mb-2">
+                <strong>Status:</strong> <span id="view-student-status" class="badge bg-success">Active</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="edit-student-btn">Edit Student</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- View Lecturer Modal -->
+  <div class="modal fade" id="viewLecturerModal" tabindex="-1" aria-labelledby="viewLecturerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewLecturerModalLabel">Lecturer Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row mb-3">
+            <div class="col-md-4 text-center">
+              <img id="view-lecturer-image" src="img/user.jpg" alt="Lecturer" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+              <h5 id="view-lecturer-name">Lecturer Name</h5>
+              <p id="view-lecturer-id" class="badge bg-primary">ID: LECT12345</p>
+            </div>
+            <div class="col-md-8">
+              <div class="mb-2">
+                <strong>Email:</strong> <span id="view-lecturer-email"></span>
+              </div>
+              <div class="mb-2">
+                <strong>Phone:</strong> <span id="view-lecturer-phone"></span>
+              </div>
+              <div class="mb-2">
+                <strong>Department:</strong> <span id="view-lecturer-department"></span>
+              </div>
+              <div class="mb-3">
+                <strong>Courses:</strong>
+                <ul id="view-lecturer-courses" class="list-group list-group-flush">
+                  <!-- Courses will be populated dynamically -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="edit-lecturer-btn">Edit Lecturer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- View Admin Modal -->
+  <div class="modal fade" id="viewAdminModal" tabindex="-1" aria-labelledby="viewAdminModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewAdminModalLabel">Administrator Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-3">
+            <img id="view-admin-image" src="img/user.jpg" alt="Admin" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+            <h5 id="view-admin-name">Admin Name</h5>
+            <p id="view-admin-id" class="badge bg-primary">ID: ADM12345</p>
+          </div>
+          <div class="mb-2">
+            <strong>Email:</strong> <span id="view-admin-email"></span>
+          </div>
+          <div class="mb-2">
+            <strong>Phone:</strong> <span id="view-admin-phone"></span>
+          </div>
+          <div class="mb-2">
+            <strong>Position:</strong> <span id="view-admin-position"></span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="edit-admin-btn">Edit Administrator</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- View Event Modal -->
+  <div class="modal fade" id="viewEventModal" tabindex="-1" aria-labelledby="viewEventModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="viewEventModalLabel">Event Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h4 id="view-event-name">Event Name</h4>
+          <div class="mb-2">
+            <strong>Date:</strong> <span id="view-event-date"></span>
+          </div>
+          <div class="mb-2">
+            <strong>Location:</strong> <span id="view-event-location"></span>
+          </div>
+          <div class="mb-3">
+            <strong>Description:</strong>
+            <p id="view-event-description"></p>
+          </div>
+          <div class="mb-2">
+            <strong>Created By:</strong> <span id="view-event-creator"></span>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="edit-event-btn">Edit Event</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Edit Profile Modal -->
+  <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="edit-profile-form">
+            <div class="mb-3">
+              <label for="edit-profile-first-name" class="form-label">First Name</label>
+              <input type="text" class="form-control" id="edit-profile-first-name" required>
+            </div>
+            <div class="mb-3">
+              <label for="edit-profile-last-name" class="form-label">Last Name</label>
+              <input type="text" class="form-control" id="edit-profile-last-name" required>
+            </div>
+            <div class="mb-3">
+              <label for="edit-profile-email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="edit-profile-email" required>
+            </div>
+            <div class="mb-3">
+              <label for="edit-profile-phone" class="form-label">Phone</label>
+              <input type="tel" class="form-control" id="edit-profile-phone" required>
+            </div>
+            <div class="mb-3">
+              <label for="edit-profile-position" class="form-label">Position</label>
+              <input type="text" class="form-control" id="edit-profile-position" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" id="save-profile-btn">Save Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- View Payment History Modal -->
+  <div class="modal fade" id="paymentHistoryModal" tabindex="-1" aria-labelledby="paymentHistoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="paymentHistoryModalLabel">Payment History</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <h6>Student: <span id="payment-history-student"></span></h6>
+            <h6>Total Amount: <span id="payment-history-total"></span></h6>
+            <h6>Amount Paid: <span id="payment-history-paid"></span></h6>
+            <h6>Balance: <span id="payment-history-balance"></span></h6>
+          </div>
+          <hr>
+          <h6>Payment History:</h6>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Reference</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody id="payment-history-table-body">
+                <!-- Payment history will be populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
