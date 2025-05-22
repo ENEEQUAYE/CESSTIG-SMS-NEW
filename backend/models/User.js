@@ -133,7 +133,7 @@ const UserSchema = new mongoose.Schema(
         return this.role === "lecturer";
         },
         enum: {
-        values: ["Computer Science", "Business", "Arts", "Health Sciences", "Medicine"],
+        values: ["Sterile Processing", "Business", "Arts", "Health Sciences", "Medicine"],
         message: "Department is not valid",
         },
     },
