@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function setProfile() {
       if (user) {
         const profilePicUrl = user.profilePicture 
-          ? `http://localhost:5000${user.profilePicture}` 
+          ? `https://cesstig-sms.onrender.com${user.profilePicture}` 
           : "https://randomuser.me/api/portraits/men/85.jpg";
   
         document.querySelector("user-info img").src = profilePicUrl;

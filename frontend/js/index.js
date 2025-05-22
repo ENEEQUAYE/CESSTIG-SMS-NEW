@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loginButton.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Logging in...';
 
         try {
-            const response = await fetch("https://cesstig-sms.onrender.com/auth/login", {
+            const response = await fetch("https://cesstig-sms.onrender.com/api/auth/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ role, email, password })
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         if (confirm(`A password reset link will be sent to ${email}. Continue?`)) {
-            fetch("https://cesstig-sms.onrender.com/auth/forgot-password", {
+            fetch("https://cesstig-sms.onrender.com/api/auth/forgot-password", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email })

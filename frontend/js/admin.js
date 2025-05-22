@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     console.log("Token:", token);
     console.log("User:", user);
-    const API_URL = "https://cesstig-sms.onrender.com"
+    const API_URL = "https://cesstig-sms.onrender.com/api"
   
     // Check if user is logged in and has admin role
     if (!token || !user || user.role !== "admin") {
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const profilePicUrl = user.profilePicture
           ? user.profilePicture.startsWith("http")
             ? user.profilePicture
-            : `http://localhost:5000${user.profilePicture}`
+            : `https://cesstig-sms.onrender.com${user.profilePicture}`
           : "img/"
   
         // Update profile picture in header
@@ -766,7 +766,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Update profile picture
           const profilePicElements = document.querySelectorAll("#profile-pic, .user-image")
           profilePicElements.forEach((img) => {
-            img.src = `http://localhost:5000${data.profilePicture}`
+            img.src = `https://cesstig-sms.onrender.com${data.profilePicture}`
           })
   
           // Update user in localStorage
@@ -961,7 +961,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Populate the courses list
           courses.forEach((course) => {
             const thumbnail = course.courseThumbnail
-            ? `http://localhost:5000${course.courseThumbnail}`
+            ? `https://cesstig-sms.onrender.com${course.courseThumbnail}`
             : "img/course1.jpg"; // Use default thumbnail if none is provided
               const courseItem = `
               <div class="col-md-6 col-lg-4 mb-4">
@@ -1184,7 +1184,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
           // Set profile picture
           if (profilePicElement && user.profilePicture) {
-            profilePicElement.src = `http://localhost:5000${user.profilePicture}`
+            profilePicElement.src = `https://cesstig-sms.onrender.com${user.profilePicture}`
           }
         },
         (error) => {
