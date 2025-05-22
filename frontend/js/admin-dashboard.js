@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     // ========== CONSTANTS AND INITIAL SETUP ==========
-    const API_URL = 'http://localhost:5000/api';
+    const API_URL = 'https://cesstig-sms.onrender.com';
     const token = localStorage.getItem("token");
     const user = JSON.parse(localStorage.getItem("user") || "{}");
     

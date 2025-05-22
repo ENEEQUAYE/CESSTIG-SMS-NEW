@@ -76,28 +76,3 @@ router.post("/login", async (req, res) => {
 
 
 module.exports = router;
-module.exports.createDefaultAdmin = async function createDefaultAdmin() {
-    const User = require("../models/User");
-  
-    const defaultAdminEmail = "admin@cesstig.edu";
-    const existing = await User.findOne({ email: defaultAdminEmail });
-  
-    if (!existing) {
-      const defaultAdmin = new User({
-        firstName: "Emmanuel",
-        lastName: "Neequaye",
-        email: defaultAdminEmail,
-        phone: "+233559340192",
-        role: "admin",
-        password: "Genius@0423!#",
-        position: "Principal",
-        profilePicture: "img/user.jpg",
-        adminId: "ADM001",
-      });
-  
-      await defaultAdmin.save();
-      console.log("✅ Default admin created:", defaultAdminEmail);
-    } else {
-      console.log("ℹ️ Default admin already exists:", defaultAdminEmail);
-    }
-  };

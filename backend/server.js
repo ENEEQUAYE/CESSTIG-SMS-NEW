@@ -6,7 +6,6 @@ const dotenv = require("dotenv");
 
 const path = require("path");
 const cookieParser = require("cookie-parser"); // Import cookie-parser
-const { createDefaultAdmin } = require("./routes/auth");
 
 // Load env vars
 dotenv.config();
@@ -51,7 +50,6 @@ mongoose
   })
   .then(() => {
     console.log("MongoDB connected");
-    createDefaultAdmin(); // Ensure default admin is created
   })
   .catch((err) => console.error("MongoDB connection error:", err));
 

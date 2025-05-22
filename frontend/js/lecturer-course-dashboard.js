@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     // API base URL
-    const API_URL = "http://localhost:5000/api"
+    const API_URL = "https://cesstig-sms.onrender.com"
   
     // Load course data
     loadCourseData(courseId)
